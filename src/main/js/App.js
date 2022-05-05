@@ -1,10 +1,16 @@
+import Home from "./Components/Home";
+
 const React = require('react');
 const axios = require('axios');
-import {Route} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 
 function App() {
     return(
-        <div>Hey.</div>
+        <main className={"main"}>
+            <Routes>
+                <Route path={"/"} exact element={<Home/>}/>
+            </Routes>
+        </main>
     )
 }
 
