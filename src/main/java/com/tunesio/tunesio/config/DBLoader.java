@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.UUID;
 
 @Component
 public class DBLoader implements CommandLineRunner {
@@ -45,15 +46,20 @@ public class DBLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         JSONObject json = new JSONObject(readUrl("https://gist.githubusercontent.com/CervantesVive/3f85bf26672cf27fe1cd932ffcb7ecac/raw/4de50b351a62158083a97f3b950bd786d3ffd928/awesome-podcasts.json"));
-
-        System.out.println(json.get("podcasts"));
-
+//        System.out.println(json.get("podcasts"));
         JSONArray results = json.getJSONArray("podcasts");
+
         for (int i = 0; i < results.length(); i++) {
             JSONObject podcast = results.getJSONObject(i);
-            System.out.println(podcast.getString("name"));
+            songDAO.save(new Song(UUID.randomUUID(),
+                    podcast.getString("name"),
+                    podcast.getString("description"),
+                    podcast.getString("source"),
+                    podcast.getString("audio"),
+                    podcast.getString("image"),
+                    podcast.getString("title")
+                    )
+            );
         }
-
-//        songDAO.save(new Song());
     }
 }
