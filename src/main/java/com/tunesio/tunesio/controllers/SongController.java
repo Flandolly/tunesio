@@ -24,7 +24,7 @@ public class SongController {
         return songDAO.findAll();
     }
 
-    @GetMapping
+    @GetMapping(value = "/{id}")
     public Object getSongById(@PathVariable("id") UUID id) {
         Optional<Song> song = songDAO.findById(id);
 
@@ -35,6 +35,15 @@ public class SongController {
         HashMap<String, Object> response = new HashMap<>();
         response.put("message", "Invalid song");
         return response;
+    }
+
+    @GetMapping(value = "/search")
+    public List<Song> getSongsFromSearch(@RequestParam String query) {
+        if (songDAO.findAllByTitleIgnoreCaseContaining(query).isEmpty()) {
+            return songDAO.findAllByNameIgnoreCaseContaining(query);
+        } else {
+            return songDAO.findAllByTitleIgnoreCaseContaining(query);
+        }
     }
 
     @PostMapping
