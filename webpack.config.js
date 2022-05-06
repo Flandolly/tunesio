@@ -7,6 +7,7 @@ module.exports = {
     mode: 'development',
     output: {
         path: path.resolve(__dirname, 'built'),
+        publicPath: "/",
         filename: './src/main/resources/static/built/bundle.js'
     },
     module: {
@@ -22,5 +23,8 @@ module.exports = {
                 }]
             }
         ]
+    },
+    devServer: {
+        historyApiFallback: true
     }
 };

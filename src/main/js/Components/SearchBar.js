@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, Input, InputGroup} from "reactstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function SearchBar() {
 
@@ -13,7 +13,7 @@ function SearchBar() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        navigate(`/search`, {replace: true, state: input});
+        navigate(`/search`, {state: input});
     }
 
     return (
