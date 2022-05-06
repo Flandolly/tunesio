@@ -38,7 +38,14 @@ public class SongController {
     }
 
     @GetMapping(value = "/search")
-    public List<Song> getSongsFromSearch(@RequestParam String query) {
+    public Object getSongsFromSearch(@RequestParam String query) {
+
+        if (songDAO.findAllByTitleIgnoreCaseContaining(query).isEmpty() && songDAO.findAllByNameIgnoreCaseContaining(query).isEmpty() ) {
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("message", String.format("No results found for %s.", query));
+            return response;
+        }
+
         if (songDAO.findAllByTitleIgnoreCaseContaining(query).isEmpty()) {
             return songDAO.findAllByNameIgnoreCaseContaining(query);
         } else {

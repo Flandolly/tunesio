@@ -1,9 +1,8 @@
 import Home from "./Components/Home";
-
-const React = require('react');
-const axios = require('axios');
-import {Route, Routes} from 'react-router-dom';
 import SongList from "./Components/SongList";
+
+import React from "react";
+import {Route, Routes} from 'react-router-dom';
 
 function App() {
     return(
