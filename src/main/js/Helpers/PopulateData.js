@@ -2,19 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {APIURL} from "../Config/constants";
 import axios from 'axios';
 
-function PopulateData(method, params) {
+function PopulateData(method, type, params) {
     const [data, setData] = useState({});
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState("loading");
 
     useEffect(() => {
-        setStatus("loading");
         switch (method) {
             case "get":
-                if (params) {
+                if (type === "search") {
                     axios.get(`${APIURL}/songs/search`, {params: {query: params}})
                         .then(function (response) {
-                            console.log(response.data);
-                            console.log(response.data.length === undefined);
                             setData(response.data);
                             setStatus("success");
                         })
