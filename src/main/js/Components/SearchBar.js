@@ -13,13 +13,18 @@ function SearchBar() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        navigate(`/search`, {state: input});
+        navigate(`/search`, {
+            state: {
+                query: input,
+                type: "search"
+            }
+        });
     }
 
     return (
         <div className={"search-bar-container w-100"}>
             <InputGroup className={"search-bar"}>
-                <Input className={"input"} value={input} onChange={(e) => handleInput(e)} placeholder="Title/Name" />
+                <Input className={"input"} value={input} onChange={(e) => handleInput(e)} placeholder="Title/Name"/>
                 <Button className={"search-button"} onClick={(e) => handleSubmit(e)} disabled={!input}>Search</Button>
             </InputGroup>
         </div>

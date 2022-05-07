@@ -1,9 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 
+
+// This isn't being used.
 function SongDetector(title, artist) {
 
-    const songData = {}
+    const songData = {
+        songArtist: null,
+        songName: null,
+        songUrl: null,
+        songDesc: null,
+        songImage: null
+    };
 
     axios.get("https://theaudiodb.p.rapidapi.com/searchtrack.php", {
         headers: {
@@ -16,18 +24,29 @@ function SongDetector(title, artist) {
         }
     })
         .then(function (response) {
-            songData.artistId = response.data.track[0].idArtist
+
+            if (response.data.track === null) {
+                return null;
+            }
+            songData.songArtist = response.data.track[0].strArtist
+            songData.songName = response.data.track[0].strTrack
             songData.songUrl = response.data.track[0].strMusicVid
             songData.songDesc = response.data.track[0].strDescriptionEN
             songData.songImage = response.data.track[0].strTrackThumb
-            console.log(songData);
 
+            // return {
+            //     songArtist: response.data.track[0].strArtist,
+            //     songName: response.data.track[0].strTrack,
+            //     songUrl: response.data.track[0].strMusicVid,
+            //     songDesc: response.data.track[0].strDescriptionEN,
+            //     songImage: response.data.track[0].strTrackThumb
+            // }
         })
         .catch(function (error) {
             console.log(error);
         })
-
-    return "";
+    console.log(songData);
+    return songData;
 }
 
 export default SongDetector;

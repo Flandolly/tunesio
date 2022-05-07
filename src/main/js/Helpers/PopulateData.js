@@ -19,9 +19,10 @@ function PopulateData(method, type, params) {
                             console.log(error);
                             setStatus("error");
                         })
-                } else {
-                    axios.get(`${APIURL}/songs/${params}`)
+                } else if (type === "update") {
+                    axios.get(`${APIURL}/songs`)
                         .then(function (response) {
+                            console.log(response.data);
                             setData(response.data);
                             setStatus("success")
                         })
