@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Header from "./Header";
 import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import SongDetector from "../Helpers/SongDetector";
 
 function SongCreate() {
 
     const [disable, setDisable] = useState(true);
     const [title, setTitle] = useState("");
     const [artist, setArtist] = useState("");
+    const [songIsLink, setSongIsLink] = useState(false);
 
     function handleChange(event) {
         if (event.target.id === "song-title") {
@@ -19,6 +21,16 @@ function SongCreate() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        const {data, status} = SongDetector(title, artist);
+    }
+
+    function handleRadio(event) {
+        if (event.target.id === "radio-link") {
+            setSongIsLink(true);
+        }
+        if (event.target.id === "radio-mp3") {
+            setSongIsLink(false);
+        }
     }
 
     useEffect(() => {
@@ -46,7 +58,7 @@ function SongCreate() {
                         <Input id={"song-artist"} onChange={(e) => handleChange(e)} value={artist} name={"artist"} placeholder={"Song/Podcast Artist"}/>
                     </Col>
                 </FormGroup>
-                <Button color={"info"} size={"sm"} onClick={(e) => handleSubmit(e)}outline disabled={disable}>Auto-Detect Song</Button>
+                <Button color={"info"} size={"sm"} onClick={(e) => handleSubmit(e)} outline disabled={disable}>Auto-Detect Song</Button>
                 <FormGroup row>
                     <Col sm={10}>
                         <Label for={"song-description"}>Description</Label>
@@ -57,11 +69,11 @@ function SongCreate() {
                     <legend className={"col-form-label col-sm-2"}>Audio Type</legend>
                     <Col sm={10}>
                         <FormGroup check inline>
-                            <Input name={"radio"} type={"radio"}/>
+                            <Input onChange={(e) => handleRadio(e)} name={"radio"} id={"radio-mp3"} type={"radio"}/>
                             <Label check>MP3</Label>
                         </FormGroup>
                         <FormGroup check inline>
-                            <Input name={"radio"} type={"radio"}/>
+                            <Input onChange={(e) => handleRadio(e)} name={"radio"} id={"radio-link"} type={"radio"}/>
                             <Label check>External URL</Label>
                         </FormGroup>
                     </Col>
@@ -76,6 +88,12 @@ function SongCreate() {
                     <Col sm={10}>
                         <Label for={"song-album"}>Album URL</Label>
                         <Input id={"song-album"} name={"album-url"} placeholder={"Song/Podcast Album Image URL"}/>
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
+                    <Col sm={10}>
+                        <Label for={"song-source"}>Source URL (if mp3)</Label>
+                        <Input id={"song-source"} disabled={songIsLink} name={"album-url"} placeholder={"Song/Podcast Source URL"}/>
                     </Col>
                 </FormGroup>
             </Form>
