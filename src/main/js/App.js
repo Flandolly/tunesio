@@ -3,6 +3,7 @@ import SongList from "./Components/SongList";
 
 import React from "react";
 import {Route, Routes} from 'react-router-dom';
+import SongCreate from "./Components/SongCreate";
 
 function App() {
     return(
@@ -10,6 +11,7 @@ function App() {
             <Routes>
                 <Route path={"/"} exact element={<Home/>}/>
                 <Route path={"/search"} exact element={<SongList/>}/>
+                <Route path={"/new"} exact element={<SongCreate/>}/>
             </Routes>
         </main>
     )
