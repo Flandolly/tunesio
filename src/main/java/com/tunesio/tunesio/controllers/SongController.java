@@ -58,7 +58,7 @@ public class SongController {
         return songDAO.save(song);
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/{id}")
     public void deleteSong(@PathVariable("id") UUID id) {
         songDAO.deleteById(id);
     }
