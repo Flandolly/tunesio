@@ -16,14 +16,13 @@ module.exports = {
         new webpack.EnvironmentPlugin(['REACT_APP_AUDIODB_RAPIDAPI_APIKEY']),
         new HtmlWebpackPlugin({
             inject: true,
-            template:  path.resolve('src/main/resources/templates/index.html'),
+            template:  path.resolve(__dirname, 'templates/index.html'),
         }),
     ],
     module: {
         rules: [
             {
                 test: path.join(__dirname, '.'),
-                include: path.resolve('./index.js'),
                 exclude: /(node_modules)/,
                 use: [{
                     loader: 'babel-loader',
