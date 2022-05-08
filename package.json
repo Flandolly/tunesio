@@ -15,7 +15,7 @@
   },
   "scripts": {
     "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js",
-    "build": "webpack NODE_ENV=production -p --env.env=prod"
+    "build": "webpack -p --config ./webpack.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
