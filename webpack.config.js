@@ -22,7 +22,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: path.join(__dirname, '.'),
+                test: /\.js$/,
+                include: path.resolve('./index.js'),
                 exclude: /(node_modules)/,
                 use: [{
                     loader: 'babel-loader',
