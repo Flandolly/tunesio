@@ -15,7 +15,6 @@ module.exports = {
     },
     plugins: [
         new webpack.EnvironmentPlugin(['REACT_APP_AUDIODB_RAPIDAPI_APIKEY']),
-        new webpack.optimize.UglifyJsPlugin(),
         new HtmlWebpackPlugin({
             inject: true,
             template:  path.resolve('src/main/resources/templates/index.html'),
