@@ -16,7 +16,7 @@ module.exports = {
         new webpack.EnvironmentPlugin(['REACT_APP_AUDIODB_RAPIDAPI_APIKEY']),
         new HtmlWebpackPlugin({
             inject: true,
-            template:  path.resolve(__dirname, 'templates/index.html'),
+            template:  path.resolve(__dirname, 'src/main/resources/templates/index.html'),
         }),
     ],
     module: {
