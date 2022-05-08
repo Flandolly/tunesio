@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 require('dotenv').config();
 
 module.exports = {
@@ -10,10 +11,15 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'built'),
         publicPath: "/",
-        filename: './src/main/resources/static/built/bundle.js'
+        filename: 'bundle.js'
     },
     plugins: [
-        new webpack.EnvironmentPlugin(['REACT_APP_AUDIODB_RAPIDAPI_APIKEY'])
+        new webpack.EnvironmentPlugin(['REACT_APP_AUDIODB_RAPIDAPI_APIKEY']),
+        new webpack.optimize.UglifyJsPlugin(),
+        new HtmlWebpackPlugin({
+            inject: true,
+            template:  path.resolve('src/main/resources/templates/index.html'),
+        }),
     ],
     module: {
         rules: [
