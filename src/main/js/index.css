@@ -1,0 +1,24 @@
+.song-image {
+    border: 1px solid black;
+    width: 250px;
+    height: 250px;
+}
+
+.song-link {
+    display: none;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+#song-title-cont::before,
+#song-artist-cont::before,
+#song-description-cont::before,
+#song-legend-cont::before,
+#song-url-cont::before,
+#song-album-cont::before {
+    content: "*";
+    color: red;
+}
