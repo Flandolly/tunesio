@@ -15,7 +15,8 @@
   },
   "scripts": {
     "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js",
-    "build": "webpack -p --config ./webpack.config.js"
+    "start": "mvnw spring-boot:run",
+    "build": "webpack --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
