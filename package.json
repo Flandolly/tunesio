@@ -2,9 +2,6 @@
   "name": "tunesio-frontend",
   "version": "0.1.0",
   "description": "Tunes.io frontend",
-  "engines": {
-    "npm": "8.0.0"
-  },
   "dependencies": {
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
