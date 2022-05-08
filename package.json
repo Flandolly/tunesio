@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Tunes.io frontend",
   "engines": {
-    "npm": "6.11.3"
+    "npm": "8.0.0"
   },
   "dependencies": {
     "axios": "^0.27.2",
