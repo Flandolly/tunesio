@@ -11,7 +11,7 @@
 	<groupId>com.tunesio</groupId>
 	<artifactId>tunesio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>tunesio</name>
 	<description>Amazon project with Spring Boot</description>
 	<properties>
