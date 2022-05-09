@@ -20,7 +20,7 @@ Song (schema below)
 
 ### Architectural Design Choice
 
-This app utilizes the Model-View-Controller (MVC) design pattern. A description of how each concept is explained as follows.
+This app utilizes the Model-View-Controller (MVC) design pattern. A description of how each concept is used is explained as follows.
 
 #### Model
 
@@ -32,15 +32,16 @@ The React Frontend represents the View portion of MVC as it handles how to displ
 
 #### Controller
 
-Each model has a respective controller (i.e. `SongController.java`) which will serve as a way to communicate with the underlying model as well as communicate changes to the view. In this case, it stores all the CRUD functionality for a Song .
+Each model has a respective controller (i.e. `SongController.java`) which will serve as a way to communicate with the underlying model as well as communicate changes to the view. In this case, it stores all the CRUD functionality for a Song.
 
 ---
 
 ### Object-Oriented Principle Usage
 
-This application incorporates several object-oriented principles. The `Song` model/class utilizes **encapsulation** as all its attributes are declared as private variables to prevent their values from being directly accessed. Instead, each of the attributes have their own set of public setter and getter methods as a means of modifying the attribute.\
-The controllers also take advantage of **inheritance** as the controller class extends from a `JpaRepository` to have access to its built-in CRUD methods that can be reused through the app rather having to create one from scratch. For the views, I was able to use **abstraction** to isolate business logic such as API calls into its own helper `.js` files instead
-of having them be unnecessarily written into my View components.
+This application incorporates several object-oriented principles. The `Song` model/class utilizes **encapsulation** as all its attributes are declared as private variables to prevent their values from being directly accessed. Instead, each of the attributes have their own set of public setter and getter methods as a means of modifying the attribute.
+\
+\
+The controllers also take advantage of **inheritance** as the controller class extends from a `JpaRepository` to have access to its built-in CRUD methods that can be reused through the app rather having to create one from scratch. For the views, I was able to use **abstraction** to isolate business logic such as API calls into its own helper `.js` files instead of having them be unnecessarily written into my View components.
 
 ---
 ### Sample API Payload + Response
@@ -91,7 +92,7 @@ User can remove an entry which will automatically refresh the page with an updat
 A form page that a user can fill out if they want to add a new song or podcast listing into the application. Upon successful creation, page automatically redirects back to the search page with their new addition at the bottom of the list.
 \
 \
-The form also comes equipped with a song detector utilizing the TheAudioDB API for music. The user just needs to provide a song title and artist and the other fields can be automatically populated if results are found from the API.
+The form also comes equipped with a song detector utilizing the `TheAudioDB` API for music. The user just needs to provide a song title and artist and the other fields can be automatically populated if results are found from the API.
 
 ![New Song Form](https://i.imgur.com/NOJt0Iv.png)
 
