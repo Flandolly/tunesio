@@ -2,10 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import {APIURL} from "../Config/constants";
 import {Card, CardBody, CardFooter, CardImg, CardSubtitle, CardText, CardTitle} from "reactstrap";
-import {useNavigate} from "react-router-dom";
 
 function Song({song}) {
-    const navigate = useNavigate();
 
     function handleOnMouseOver() {
         document.getElementById(`${song.id}`).style.display = 'inline';

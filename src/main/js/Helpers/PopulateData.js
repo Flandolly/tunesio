@@ -22,7 +22,6 @@ function PopulateData(method, type, params) {
                 } else if (type === "update") {
                     axios.get(`${APIURL}/songs`)
                         .then(function (response) {
-                            console.log(response.data);
                             setData(response.data);
                             setStatus("success")
                         })

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Header from "./Header";
 import {useLocation, useNavigate} from "react-router-dom";
 import PopulateData from "../Helpers/PopulateData";
@@ -16,41 +16,6 @@ function SongList() {
         navigate(`/new`)
     }
 
-    // function handleToggle(event) {
-    //     event.preventDefault();
-    //
-    //     const ellipsis = document.getElementById("ellipsis");
-    //     const moreText = document.getElementById("more");
-    //     const toggleButton = document.getElementById("text-toggle-button");
-    //
-    //     if (ellipsis.style.display === "none") {
-    //         toggleButton.innerHTML = "Read More";
-    //         moreText.style.display = "none";
-    //         ellipsis.style.display = "inline";
-    //     } else {
-    //         toggleButton.innerHTML = "Read Less";
-    //         moreText.style.display = "inline";
-    //         ellipsis.style.display = "none";
-    //     }
-    // }
-    //
-    // setTimeout(() => {
-    //     const songTexts = document.getElementsByClassName("card-text");
-    //
-    //     for (let i = 0; i < songTexts.length; i++) {
-    //         if (songTexts[i].innerHTML.length >= 255 && !songTexts[i].innerText.substring(0, 260).includes("...")) {
-    //             songTexts[i].innerHTML = songTexts[i].innerText.substring(0, 256) + "<span id='ellipsis'>...</span><span id='more'>" + songTexts[i].innerText.substring(256) + "</span>";
-    //             const toggleButton = document.createElement("button");
-    //             toggleButton.id = "text-toggle-button";
-    //             toggleButton.classList.add("btn", "btn-link", "btn-sm");
-    //             toggleButton.innerHTML = "Read More";
-    //             toggleButton.style.color = "inherit";
-    //             toggleButton.addEventListener("click", (e) => handleToggle(e));
-    //             songTexts[i].append(toggleButton);
-    //         }
-    //     }
-    //
-    // }, 100);
 
     return (
         <div className={"song-list-container"}>
