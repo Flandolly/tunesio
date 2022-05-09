@@ -5,7 +5,6 @@ import {Card, CardBody, CardFooter, CardImg, CardSubtitle, CardText, CardTitle} 
 import {useNavigate} from "react-router-dom";
 
 function Song({song}) {
-    // console.log(song.name);
     const navigate = useNavigate();
 
     function handleOnMouseOver() {
@@ -21,12 +20,7 @@ function Song({song}) {
 
         axios.delete(`${APIURL}/songs/${song.id}`)
             .then(function(response) {
-                navigate(`/search`, {
-                    state: {
-                        type: "update",
-                        query: ""
-                    }
-                })
+                window.location.reload();
             })
             .catch(function (error) {
                 console.log(error);
