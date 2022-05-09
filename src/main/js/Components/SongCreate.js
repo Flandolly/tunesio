@@ -63,7 +63,7 @@ function SongCreate() {
 
                 document.getElementById("song-artist").value = response.data.track[0].strArtist;
                 document.getElementById("song-title").value = response.data.track[0].strTrack;
-                document.getElementById("song-url").value = response.data.track[0].strMusicVid.replace("http://", "https://");
+                document.getElementById("song-url").value = response.data.track[0].strMusicVid ? response.data.track[0].strMusicVid.replace("http://", "https://") : null;
                 document.getElementById("song-description").value = response.data.track[0].strDescriptionEN;
                 document.getElementById("song-album").value = response.data.track[0].strTrackThumb;
                 document.getElementById("song-radio-link").checked = true;
