@@ -181,7 +181,7 @@ function SongCreate() {
                                name={"artist"} placeholder={"Song/Podcast Artist"}/>
                     </Col>
                 </FormGroup>
-                <Button color={"info"} size={"sm"} onClick={(e) => handleSongDetector(e)} outline disabled={disable}>Auto-Detect
+                <Button color={"dark"} size={"sm"} onClick={(e) => handleSongDetector(e)} outline disabled={disable}>Auto-Detect
                     Song</Button>
                 <FormGroup id={"song-description-cont"} row>
                     <Col sm={10}>
