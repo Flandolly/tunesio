@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Header from "./Header";
-import {Alert, Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import {Alert, Button, Col, Form, FormFeedback, FormGroup, Input, Label} from "reactstrap";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {APIURL} from "../Config/constants";
@@ -16,7 +16,8 @@ function SongCreate() {
     const [source, setSource] = useState("");
     const [songIsLink, setSongIsLink] = useState(false);
     const [alert, setAlert] = useState(false);
-    const [success, setSuccess] = useState(false)
+    const [success, setSuccess] = useState(false);
+    const [warning, setWarning] = useState(false);
     const [formComplete, setFormComplete] = useState(false);
     const navigate = useNavigate();
 
@@ -29,6 +30,11 @@ function SongCreate() {
         }
         if (event.target.id === "song-description") {
             setDescription(event.target.value);
+            if (event.target.value.length > 3000) {
+                setWarning(true);
+            } else {
+                setWarning(false);
+            }
         }
         if (event.target.id === "song-url") {
             setUrl(event.target.value);
@@ -71,6 +77,7 @@ function SongCreate() {
                 setSongIsLink(true);
                 setSuccess(true);
                 setAlert(false);
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -128,6 +135,11 @@ function SongCreate() {
             return false;
         }
 
+        if (description.length > 3000) {
+            setWarning(true);
+            return false;
+        }
+
         for (let i = 0; i < fields.length; i++) {
             if (fields[i].id.includes("song")) {
                 if (!fields[i].value && fields[i].id !== "song-source") {
@@ -174,8 +186,9 @@ function SongCreate() {
                 <FormGroup id={"song-description-cont"} row>
                     <Col sm={10}>
                         <Label for={"song-description"}>Description</Label>
-                        <Input id={"song-description"} name={"description"} onChange={(e) => handleChange(e)} value={description}
+                        <Input invalid={warning} id={"song-description"} name={"description"} onChange={(e) => handleChange(e)} value={description}
                                placeholder={"Song/Podcast Description"} type={"textarea"}/>
+                        <FormFeedback>Description is too long! Field can be up to 3000 characters.</FormFeedback>
                     </Col>
                 </FormGroup>
                 <FormGroup id={"song-legend-cont"} row tag={"fieldset"}>
