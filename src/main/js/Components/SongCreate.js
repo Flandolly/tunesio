@@ -10,9 +10,14 @@ function SongCreate() {
     const [disable, setDisable] = useState(true);
     const [title, setTitle] = useState("");
     const [artist, setArtist] = useState("");
+    const [description, setDescription] = useState("");
+    const [url, setUrl] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    const [source, setSource] = useState("");
     const [songIsLink, setSongIsLink] = useState(false);
     const [alert, setAlert] = useState(false);
     const [success, setSuccess] = useState(false)
+    const [formComplete, setFormComplete] = useState(false);
     const navigate = useNavigate();
 
     function handleChange(event) {
@@ -21,6 +26,18 @@ function SongCreate() {
         }
         if (event.target.id === "song-artist") {
             setArtist(event.target.value);
+        }
+        if (event.target.id === "song-description") {
+            setDescription(event.target.value);
+        }
+        if (event.target.id === "song-url") {
+            setUrl(event.target.value);
+        }
+        if (event.target.id === "song-album") {
+            setImageUrl(event.target.value);
+        }
+        if (event.target.id === "song-source") {
+            setSource(event.target.value);
         }
     }
 
@@ -40,6 +57,7 @@ function SongCreate() {
             .then(function (response) {
 
                 if (response.data.track === null) {
+                    setAlert(true);
                     return null;
                 }
 
@@ -48,7 +66,7 @@ function SongCreate() {
                 document.getElementById("song-url").value = response.data.track[0].strMusicVid.replace("http://", "https://");
                 document.getElementById("song-description").value = response.data.track[0].strDescriptionEN;
                 document.getElementById("song-album").value = response.data.track[0].strTrackThumb;
-                document.getElementById("radio-link").checked = true;
+                document.getElementById("song-radio-link").checked = true;
                 setSongIsLink(true);
                 setSuccess(true);
             })
@@ -58,10 +76,10 @@ function SongCreate() {
     }
 
     function handleRadio(event) {
-        if (event.target.id === "radio-link") {
+        if (event.target.id === "song-radio-link") {
             setSongIsLink(true);
         }
-        if (event.target.id === "radio-mp3") {
+        if (event.target.id === "song-radio-mp3") {
             setSongIsLink(false);
         }
     }
@@ -93,10 +111,38 @@ function SongCreate() {
             })
     }
 
+    function checkFormComplete() {
+
+        const fields = document.getElementsByTagName("input");
+
+        if (!description) {
+            return false;
+        }
+
+        if (!document.getElementById("song-radio-mp3").checked && !document.getElementById("song-radio-link").checked) {
+            return false
+        }
+
+        if (!source && !songIsLink) {
+            return false;
+        }
+
+        for (let i = 0; i < fields.length; i++) {
+            if (fields[i].id.includes("song")) {
+                if (!fields[i].value && fields[i].id !== "song-source") {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     useEffect(() => {
         if (title && artist) {
             setDisable(false);
         }
+        setFormComplete(checkFormComplete);
     });
 
     return (
@@ -111,14 +157,14 @@ function SongCreate() {
                 <FormGroup id={"song-title-cont"} row>
                     <Col sm={10}>
                         <Label for={"song-title"}>Title</Label>
-                        <Input required id={"song-title"} onChange={(e) => handleChange(e)} value={title} name={"title"}
+                        <Input id={"song-title"} onChange={(e) => handleChange(e)} value={title} name={"title"}
                                placeholder={"Song/Podcast Title"}/>
                     </Col>
                 </FormGroup>
                 <FormGroup id={"song-artist-cont"} row>
                     <Col sm={10}>
                         <Label for={"song-artist"}>Artist</Label>
-                        <Input required id={"song-artist"} onChange={(e) => handleChange(e)} value={artist}
+                        <Input id={"song-artist"} onChange={(e) => handleChange(e)} value={artist}
                                name={"artist"} placeholder={"Song/Podcast Artist"}/>
                     </Col>
                 </FormGroup>
@@ -127,7 +173,7 @@ function SongCreate() {
                 <FormGroup id={"song-description-cont"} row>
                     <Col sm={10}>
                         <Label for={"song-description"}>Description</Label>
-                        <Input required id={"song-description"} name={"description"}
+                        <Input id={"song-description"} name={"description"} onChange={(e) => handleChange(e)} value={description}
                                placeholder={"Song/Podcast Description"} type={"textarea"}/>
                     </Col>
                 </FormGroup>
@@ -135,12 +181,12 @@ function SongCreate() {
                     <legend id={"song-legend"} className={"col-form-label col-sm-2"}>Audio Type</legend>
                     <Col sm={10}>
                         <FormGroup check inline>
-                            <Input required onChange={(e) => handleRadio(e)} name={"radio"} id={"radio-mp3"}
+                            <Input onChange={(e) => handleRadio(e)} name={"radio"} id={"song-radio-mp3"}
                                    type={"radio"}/>
                             <Label check>MP3</Label>
                         </FormGroup>
                         <FormGroup check inline>
-                            <Input onChange={(e) => handleRadio(e)} name={"radio"} id={"radio-link"} type={"radio"}/>
+                            <Input onChange={(e) => handleRadio(e)} name={"radio"} id={"song-radio-link"} type={"radio"}/>
                             <Label check>External URL</Label>
                         </FormGroup>
                     </Col>
@@ -148,24 +194,24 @@ function SongCreate() {
                 <FormGroup id={"song-url-cont"} row>
                     <Col sm={10}>
                         <Label for={"song-url"}>Audio URL</Label>
-                        <Input required id={"song-url"} name={"url"} placeholder={"Song/Podcast URL"}/>
+                        <Input id={"song-url"} name={"url"} placeholder={"Song/Podcast URL"} onChange={(e) => handleChange(e)} value={url}/>
                     </Col>
                 </FormGroup>
                 <FormGroup id={"song-album-cont"} row>
                     <Col sm={10}>
                         <Label for={"song-album"}>Album Image</Label>
-                        <Input required id={"song-album"} name={"album-url"}
+                        <Input id={"song-album"} name={"album-url"} onChange={(e) => handleChange(e)} value={imageUrl}
                                placeholder={"Song/Podcast Album Image URL"}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Col sm={10}>
                         <Label for={"song-source"}>Source URL (if mp3)</Label>
-                        <Input required={!songIsLink} id={"song-source"} disabled={songIsLink} name={"source"}
-                               placeholder={"Podcast Source URL"}/>
+                        <Input id={"song-source"} disabled={songIsLink} name={"source"}
+                               placeholder={"Podcast Source URL"} onChange={(e) => handleChange(e)} value={source}/>
                     </Col>
                 </FormGroup>
-                <Button onClick={(e) => handleFormSubmit(e)} color="danger">Submit</Button>
+                <Button type="submit" disabled={!formComplete} onClick={(e) => handleFormSubmit(e)} color="danger">Submit</Button>
             </Form>
         </div>
     )
