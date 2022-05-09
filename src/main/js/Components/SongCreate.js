@@ -58,17 +58,19 @@ function SongCreate() {
 
                 if (response.data.track === null) {
                     setAlert(true);
+                    setSuccess(false);
                     return null;
                 }
 
                 setArtist(response.data.track[0].strArtist);
                 setTitle(response.data.track[0].strTrack);
                 setUrl(response.data.track[0].strMusicVid ? response.data.track[0].strMusicVid.replace("http://", "https://") : "");
-                setDescription(response.data.track[0].strDescriptionEN);
-                setImageUrl(response.data.track[0].strTrackThumb);
+                setDescription(response.data.track[0].strDescriptionEN ? response.data.track[0].strDescriptionEN : "");
+                setImageUrl(response.data.track[0].strTrackThumb ? response.data.track[0].strTrackThumb : "");
                 document.getElementById("song-radio-link").checked = true;
                 setSongIsLink(true);
                 setSuccess(true);
+                setAlert(false);
             })
             .catch(function (error) {
                 console.log(error);
@@ -95,7 +97,6 @@ function SongCreate() {
             image: formData.get("album-url"),
             title: formData.get("title")
         }
-        console.log(newSong);
 
         axios.post(`${APIURL}/songs`, newSong)
             .then(function (response) {
@@ -204,10 +205,10 @@ function SongCreate() {
                                placeholder={"Song/Podcast Album Image URL"}/>
                     </Col>
                 </FormGroup>
-                <FormGroup row>
+                <FormGroup id={"song-source-cont"} style={{display: songIsLink ? "none" : "flex"}} row>
                     <Col sm={10}>
                         <Label for={"song-source"}>Source URL (if mp3)</Label>
-                        <Input id={"song-source"} disabled={songIsLink} name={"source"}
+                        <Input id={"song-source"} name={"source"}
                                placeholder={"Podcast Source URL"} onChange={(e) => handleChange(e)} value={source}/>
                     </Col>
                 </FormGroup>

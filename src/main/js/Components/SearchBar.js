@@ -25,7 +25,7 @@ function SearchBar() {
         <div className={"search-bar-container w-100"}>
             <InputGroup className={"search-bar"}>
                 <Input className={"input"} value={input} onChange={(e) => handleInput(e)} placeholder="Title/Name"/>
-                <Button className={"search-button"} onClick={(e) => handleSubmit(e)} disabled={!input}>Search</Button>
+                <Button className={"search-button"} onClick={(e) => handleSubmit(e)}>Search</Button>
             </InputGroup>
         </div>
     )

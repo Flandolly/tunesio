@@ -21,7 +21,7 @@ function SongList() {
         <div className={"song-list-container"}>
             <Header/>
             <div className={"song-list-heading d-flex flex-row justify-content-between"}>
-                <p className={"h6"}>Showing results for "{location.state.query}"</p>
+                <p className={"h6"}>{location.state.query ? `Showing results for "${location.state.query}"` : "Showing all entries"}</p>
                 <Button onClick={(e) => handleSubmit(e)} color={"success"} size={"lg"}><strong>+</strong></Button>
             </div>
             <div className={"song-list"}>
