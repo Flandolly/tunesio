@@ -58,6 +58,15 @@ public class SongController {
         return songDAO.save(song);
     }
 
+    @PutMapping(value = "/{id}")
+    public Song updateSong(@RequestBody Song newSong) {
+        Song song = songDAO.getById(newSong.getId());
+
+        song = newSong;
+
+        return songDAO.save(song);
+    }
+
     @DeleteMapping(value = "/{id}")
     public void deleteSong(@PathVariable("id") UUID id) {
         songDAO.deleteById(id);
